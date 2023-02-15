@@ -58,7 +58,7 @@ if ($num > 0) {
         array_push($output['data'], $obj_array);
     }
 
-    //match in php codiceprodotto/nomeprodotto (terapia_corrente/shortname)
+    //match in php codiceprodotto/nomeprodotto
     foreach($output['data'] as $key => $value) {
         
             $array = $output['data'][$key]['from'];
