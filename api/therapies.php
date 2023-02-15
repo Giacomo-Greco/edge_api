@@ -61,6 +61,13 @@ if ($num > 0) {
     //match in php codiceprodotto/nomeprodotto (terapia_corrente/shortname)
     foreach($output['data'] as $key => $value) {
         
+            $array = $output['data'][$key]['from'];
+
+            $output['data'][$key]['from'] = array_reduce(explode(",", $array), function ($previous, $next)use($nodes_array) {
+                $medicine_name = array_search($next, $nodes_array);
+                return $previous . $medicine_name . ",";
+            });
+
             $array = $output['data'][$key]['to'];
 
             $output['data'][$key]['to'] = array_reduce(explode(",", $array), function ($previous, $next)use($nodes_array) {
