@@ -62,15 +62,12 @@ class Therapies {
         //ho deciso di usare entrambi i metodi a puro scopo dimostrativo
 
         $query = "SELECT 
-        hiv_pazienti.id,
-        data_cambio_terapia,
-        GROUP_CONCAT(short_name) as terapia_from,
-        REPLACE(hiv_pazienti.terapia_corrente, '&', ',') as terapia_to,
+        REPLACE(terapia_precedente, '&', ',') as terapia_from,
+        REPLACE(terapia_corrente, '&', ',') as terapia_to,
         COUNT(*) as switch
         FROM hiv_pazienti
-        INNER JOIN hiv_prodotti ON FIND_IN_SET(hiv_prodotti.codice_prod, REPLACE(hiv_pazienti.terapia_precedente, '&', ','))
         " . $params['data'] . "
-        GROUP BY hiv_pazienti.id, terapia_precedente, terapia_corrente
+        GROUP BY terapia_precedente, terapia_corrente
         ORDER BY switch DESC
         LIMIT " . $params['limit'] . "
         ";
